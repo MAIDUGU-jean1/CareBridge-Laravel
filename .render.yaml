@@ -1,30 +1,12 @@
+# Exported from Render on 2025-06-15T13:57:12Z
 services:
   - type: web
-    name: carebridge
-    env: php
+    name: carebridge.health
+    runtime: node
+    repo: https://github.com/MAIDUGU-jean1/CareBridge-Laravel
     plan: free
-    buildCommand: |
-      composer install --no-interaction --prefer-dist --optimize-autoloader
-      npm install
-      npm run build
-      php artisan migrate --force
-    startCommand: php artisan serve --host=0.0.0.0 --port=10000
-    envVars:
-      - key: APP_ENV
-        value: production
-      - key: APP_KEY
-        generateValue: true
-      - key: APP_DEBUG
-        value: false
-      - key: DB_CONNECTION
-        value: mysql
-      - key: DB_HOST
-        value: your-db-host
-      - key: DB_PORT
-        value: 3306
-      - key: DB_DATABASE
-        value: carebridge
-      - key: DB_USERNAME
-        value: your-db-user
-      - key: DB_PASSWORD
-        value: ""
+    region: oregon
+    buildCommand: yarn install; yarn build
+    startCommand: http://0.0.0.0:10000
+    autoDeployTrigger: commit
+version: "1"
