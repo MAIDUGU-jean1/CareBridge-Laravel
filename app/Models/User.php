@@ -27,6 +27,12 @@ class User extends Authenticatable
             'experience',
     ];
 
+    public function profile()
+    {
+        return $this->hasOne(PatientProfile::class);
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *

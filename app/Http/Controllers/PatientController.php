@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PatientController extends Controller
 {
@@ -14,10 +15,12 @@ class PatientController extends Controller
     }
 
     public function showFavourite(){
+        
         return view('patients.favourite');
     }
 
     public function showProfile(){
+
         return view('patients.profile_setting');
     }
     

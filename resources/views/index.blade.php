@@ -298,7 +298,7 @@
           <div>
             <label class="block mb-1">Password</label>
             <input type="password" class="w-full border border-gray-300 rounded px-3 py-2" name="password" required />
-              @error('email')
+              @error('password')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
               @enderror
           </div>

@@ -61,6 +61,7 @@
 							<li class="active">
 								<a href="index-2.html">Home</a>
 							</li>
+							@can('is-doctor')
 							<li class="has-submenu">
 								<a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
@@ -76,8 +77,7 @@
 									<li><a href="doctor-register.html">Doctor Register</a></li>
 								</ul>
 							</li>	
-
-							@cannot('is-doctor')
+								@endcan
 							<li class="has-submenu">
 								<a href="#">Patients <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
@@ -93,7 +93,7 @@
 									<li><a href="change-password.html">Change Password</a></li>
 								</ul>
 							</li>
-							@endcannot
+						
 							<li class="has-submenu">
 								<a href="#">Pages <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
@@ -128,7 +128,7 @@
 							</div>
 							<div class="header-contact-detail">
 								<p class="contact-header">Contact</p>
-								<p class="contact-info-header"> +1 315 369 5943</p>
+								<p class="contact-info-header"> {{ Auth::user()->number }} </p>
 							</div>
 						</li>
 						{{-- <li class="nav-item">

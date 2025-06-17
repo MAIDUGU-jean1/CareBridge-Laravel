@@ -65,13 +65,13 @@
 								<div class="widget-profile pro-widget-content">
 									<div class="profile-info-widget">
 										<a href="#" class="booking-doc-img">
-											<img src="{{ asset('assets/img/patients/patient.jpg') }}" alt="User Image">
+											<img src="{{ asset('storage/' . Auth::user()?->profile->photo) }}" alt="User Image">
 										</a>
 										<div class="profile-det-info">
-											<h3>Richard Wilson</h3>
+											<h3>{{ Auth::user()?->profile?->name }}</h3>
 											<div class="patient-details">
-												<h5><i class="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years</h5>
-												<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> Newyork, USA</h5>
+												<h5><i class="fas fa-birthday-cake"></i>{{ \Carbon\Carbon::parse(Auth::user()?->profile?->DOB)->format('d-m-Y') }}, <strong> {{ Auth::user()->profile->age }} Years old </strong></h5>
+												<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i>  {{ Auth::user()?->profile?->state }}, {{ Auth::user()?->profile?->country }}</h5>
 											</div>
 										</div>
 									</div>
@@ -111,10 +111,11 @@
 												</a>
 											</li>
 											<li>
-												<a href="index-2.html">
+												<form action="{{ Route('Logout') }}" method="POST">
+													@csrf
 													<i class="fas fa-sign-out-alt"></i>
-													<span>Logout</span>
-												</a>
+													<button><span>Logout</span></button>
+												</form>
 											</li>
 										</ul>
 									</nav>
@@ -132,18 +133,22 @@
 										<div class="col-md-12 col-lg-6">
 										
 											<!-- Change Password Form -->
-											<form>
+											<form method="POST" action="{{ Route('Password.Update') }}">
+												@if(session('success'))
+													<div class="alert alert-success">{{ session('success') }}</div>
+												@endif
+												@csrf
 												<div class="form-group">
 													<label>Old Password</label>
-													<input type="password" class="form-control">
+													<input type="password" class="form-control" name="current_password">
 												</div>
 												<div class="form-group">
 													<label>New Password</label>
-													<input type="password" class="form-control">
+													<input type="password" class="form-control" name="new_password">
 												</div>
 												<div class="form-group">
 													<label>Confirm Password</label>
-													<input type="password" class="form-control">
+													<input type="password" class="form-control" name="new_password_confirmation">
 												</div>
 												<div class="submit-section">
 													<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
