@@ -59,7 +59,7 @@
 						</div>
 						<ul class="main-nav">
 							<li class="active">
-								<a href="index-2.html">Home</a>
+								<a href="{{ Route('Home.Show') }}">Home</a>
 							</li>
 							@can('is-doctor')
 							<li class="has-submenu">
@@ -77,17 +77,17 @@
 									<li><a href="doctor-register.html">Doctor Register</a></li>
 								</ul>
 							</li>	
-								@endcan
+							@endcan
 							<li class="has-submenu">
 								<a href="#">Patients <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
-									<li><a href="search.html">Search Doctor</a></li>
+									<li><a href="{{ Route('Doctor.Search') }}">Search Doctor</a></li>
 									<li><a href="doctor-profile.html">Doctor Profile</a></li>
 									<li><a href="booking.html">Booking</a></li>
-									<li><a href="checkout.html">Checkout</a></li>
+									<li><a href="{{ Route('CheckOut.Show') }}">Checkout</a></li>
 									<li><a href="booking-success.html">Booking Success</a></li>
 									<li><a href="patient-dashboard.html">Patient Dashboard</a></li>
-									<li><a href="favourites.html">Favourites</a></li>
+									<li><a href="{{ Route('Favourite.Show') }}">Favourites</a></li>
 									<li><a href="chat.html">Chat</a></li>
 									<li><a href="profile-settings.html">Profile Settings</a></li>
 									<li><a href="change-password.html">Change Password</a></li>
@@ -115,9 +115,12 @@
 									<li><a href="forgot-password.html">Forgot Password</a></li>
 								</ul>
 							</li>
-							<li>
-								<a href="admin/index.html" target="_blank">Admin</a>
-							</li>
+							@can('is-admin')
+								<li>
+									<a href="admin/index.html" target="_blank">Admin</a>
+								</li>
+							@endcan
+
 					
 						</ul>		 
 					</div>		 
@@ -138,17 +141,21 @@
 								<li class="nav-item dropdown has-arrow logged-item">
 							<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 								<span class="user-img">
-									<img class="rounded-circle" src="{{ asset('assets/img/patients/patient.jpg') }}" width="31" alt="Ryan Taylor">
+									{{-- <img class="rounded-circle" src="{{ asset('assets/img/patients/patient.jpg') }}" width="31" alt="Ryan Taylor"> --}}
+									<img class="rounded-circle" src="{{ asset('storage/'. Auth::user()->profile->photo) }}" width="31" alt="{{ Auth::user()->name }}">
+									
 								</span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<div class="user-header">
 									<div class="avatar avatar-sm">
-										<img src="{{ asset('assets/img/patients/patient.jpg') }}" alt="User Image" class="avatar-img rounded-circle">
+										{{-- <img src="{{ asset('assets/img/patients/patient.jpg') }}" alt="User Image" class="avatar-img rounded-circle"> --}}
+										<img src="{{ asset('storage/'. Auth::user()->profile->photo) }}" alt="User Image" class="avatar-img rounded-circle">
 									</div>
 									<div class="user-text">
-										<h6>Richard Wilson</h6>
-										<p class="text-muted mb-0">Patient</p>
+										<h6>{{ Auth::user()?->profile?->name }}</h6>
+										{{-- <p class="text-muted mb-0">Patient</p> --}}
+										<p class="text-muted mb-0">{{ Auth::user()->type }}</p>
 									</div>
 								</div>
 								<a class="dropdown-item" href="{{ Route('Dashboard.Show')}}">Dashboard</a>
@@ -163,8 +170,8 @@
 			
             {{-- Content will be render here --}}
 			
-
-		   
+		
+		
 	   </div>
 	   <!-- /Main Wrapper -->
 	  

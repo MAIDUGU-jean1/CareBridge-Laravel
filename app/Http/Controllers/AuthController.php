@@ -64,7 +64,7 @@ class AuthController extends Controller
             if ($user->type === 'doctor') {
                 return redirect()->route('doctor.dashboard');
             } elseif ($user->type === 'patient') {
-                return redirect()->route('Dashboard.Show');
+                return redirect()->route('Home.Show');
             } else {
                 return redirect()->route('home');
             }

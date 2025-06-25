@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('patient_profiles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // link to Auth::user()
+            $table->unsignedBigInteger('user_id');
             $table->string('photo')->nullable();
             $table->string('name');
             $table->date('DOB')->nullable();

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientLogicController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\EnsureUserIsLoggedIn;
 
 Route::get('/', function () {
     return view('index');
@@ -29,9 +30,11 @@ Route::middleware('auth')->group( function(){
         Route::post('profile-update', [PatientLogicController::class,'UpdateProfile'])->name('Profile.Update');
         Route::post('update-password', [PatientLogicController::class,'UpdatePassword'])->name('Password.Update');
         Route::post('logout', [PatientLogicController::class,'Logout'])->name('Logout');
+        // Patient/ Doctor Routes
+        Route::get('doctor/{id}', [PatientController::class,'showDoctor'])->name('Doctor.Show'); // still have to check this Route 
     });
 });
 
 /// Authentication Routes
-Route::post('/register', [AuthController::class,'store'])->name('register');
+Route::post('/register', [AuthController::class,'store'])->name('register'); 
 Route::post('/login', [AuthController::class,'Login'])->name('login');  
